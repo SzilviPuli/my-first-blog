@@ -1,22 +1,13 @@
-<html>
-    <head>
-        <title>Django Girls blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">Django Girls Blog</a></h1>
-{% for post in posts %}
-    {{ post }}
-{% endfor %}
-            <p>published: 16.05.2015, 16:49</p>
-            <h2><a href="">My first post</a></h2>
-            <p>After 4 hours sleeping, after a very exhausting week, constantly having a very bad and rackless headache, I succeeded with creating my first blog within 1 day, so now every effort and pain turned into joy and pride. :)</p>
-{% for post in posts %}
-    {{ post }}
-{% endfor %}
-            <p>published: 16.05.2015, 16:51</p>
-            <h2><a href="">My second post</a></h2>
-            <p>I will celebrate this with a glass of wine in my bed. :)</p>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="{% url 'blog.views.post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaks }}</p>
         </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock content %}
